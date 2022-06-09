@@ -10,4 +10,5 @@ public interface CardService {
     void historyCard(JSONArray inserted) throws FileNotFoundException;
     void throwMoney(JSONArray inserted);
     void seeBalanc(JSONArray inserted);
+    void exchangeInfo();
 }

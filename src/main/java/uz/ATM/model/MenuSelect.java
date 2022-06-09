@@ -22,6 +22,7 @@ public class MenuSelect {
                     System.out.println("1. Money transfer");
                     System.out.println("2. See balance");
                     System.out.println("3. Income and expenditure history");
+                    System.out.println("4. Exchange rates");
                     System.out.println("0. Exit");
 
                     switch (scanner.nextInt()) {
@@ -36,6 +37,9 @@ public class MenuSelect {
                         case 3 : {
                             cardService.historyCard(inserted);
                             break;
+                        }
+                        case 4 : {
+                            cardService.exchangeInfo();
                         }
                         case 0 : {
                             return;

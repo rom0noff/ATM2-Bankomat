@@ -12,13 +12,12 @@ import uz.ATM.model.Card;
 
 
 import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Random;
-import java.util.Scanner;
-
+import java.util.*;
 
 
 public class ServiceImpelement implements CardService{
@@ -286,6 +285,31 @@ public class ServiceImpelement implements CardService{
             jsonObject = (JSONObject) inserted.get(CheckCard.globalNum);
 
         System.out.println(jsonObject.get("balance"));
+    }
+
+    @Override
+    public void exchangeInfo() {
+        try{
+            URL url = new URL("https://cbu.uz/oz/arkhiv-kursov-valyut/json/");
+            URLConnection connection = url.openConnection();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            InputStreamReader reader = new InputStreamReader(connection.getInputStream());
+            JSONArray jsonArray = gson.fromJson(reader, JSONArray.class);
+            for (int i = 0; i < jsonArray.size(); i++) {
+                Map jsonObject = (Map) jsonArray.get(i);
+                System.out.println("-----"+jsonObject.get("Ccy")+"-----");
+                System.out.println(jsonObject.get("CcyNm_EN"));
+                System.out.println(jsonObject.get("Rate"));
+                System.out.println(jsonObject.get("Diff"));
+                System.out.println(jsonObject.get("Date"));
+                System.out.println("=======================");
+            }
+
+        }catch (MalformedURLException e){
+            e.printStackTrace();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
 
