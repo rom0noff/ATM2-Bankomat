@@ -2,7 +2,6 @@ package uz.ATM.Service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -61,6 +60,7 @@ public class ServiceImpelement implements CardService{
             cardType = "HUMO";
         }
         System.out.println("-----------=Successful=------------");
+
         JSONParser jsonParser = new JSONParser();
         try(FileReader fileReader = new FileReader("CardData/json/cardData.json")){
             Object obj = jsonParser.parse(fileReader);
@@ -71,6 +71,7 @@ public class ServiceImpelement implements CardService{
             File file = new File("CardData/json/cardData.json");
             OutputStream outputStream = new FileOutputStream(file);
             outputStream.write(gson.toJson(jsonArray).getBytes(StandardCharsets.UTF_8));
+            System.out.println("Your Card Information : " + card);
         }catch (IOException e){
             e.printStackTrace();
         } catch (ParseException e) {
@@ -82,6 +83,83 @@ public class ServiceImpelement implements CardService{
     @Override
     public void historyCard(JSONArray inserted) {
 
+        Scanner scanner = new Scanner(System.in);
+        JSONObject jsonObject = (JSONObject) inserted.get(CheckCard.globalNum);
+        try {
+            Scanner scanner1 = new Scanner(new File("CardData/IncomeAndExpenditureFile/IncomeAndExpenditure.txt"));
+
+            String[] obj1 = null;
+            String [] object=null;
+            System.out.println("1. Kirim");
+            System.out.println("2. Chiqim");
+            int Num = scanner.nextInt();
+            while (scanner1.hasNext()) {
+                String obj = scanner1.nextLine();
+                obj1 = obj.split(" ");
+                object = obj.split(",");
+
+                switch (Num) {
+                    case 1: {
+
+                        if (obj1[1].equals("Kirim")) {
+                            System.err.println("--------------=CHEK=--------------");
+                            String[] data0 = object[1].split(":");
+                            String[] data1 = (object[2].split(":"));
+                            String[] data2 = (object[11].split(":"));
+                            data2 = data2[1].split("}");
+                            String[] data3 = object[10].split(":");
+                            String[] data4 = object[7].split(":");
+                            data4 = data4[1].split("");
+                            String[] data5 = object[5].split(":");
+                            String[] data6 = object[4].split(":");
+
+                            String data = data1[1].substring(1,5);
+                            if(jsonObject.get("accountNum").equals(data)) {
+//                                System.out.println("----------------------------------");
+                                System.out.println(data1[1] + "  <-------- +" + data0[1] + " --------  " + data2[0]);
+                                System.out.println("balance : " + data6[1]);
+                                System.out.println(data4[1] + "." + data4[3] + "." + data5[1] + " " + data3[1] + ":" + data3[2] + ":" + data3[3]);
+                                System.out.println("----------------------------------");
+                            }else {
+                                System.out.println("Your card history data was not found.");
+                            }
+                        }
+                        break;
+                    }
+                    case 2: {
+                        if (obj1[1].equals("Chiqim")) {
+                            System.err.println("--------------=CHEK=--------------");
+                            String[] data0 = object[1].split(":");
+                            String[] data1 = (object[8].split(":"));
+                            String[] data2 = object[5].split(":");
+                            String[] data3 = object[3].split(":");
+                            String[] data4 = object[7].split(":");
+                            data4 = data4[1].split("");
+                            String[] data5 = object[4].split(":");
+                            String[] data6 = object[11].split(":");
+                            String[] data7 = data6[3].split("}");
+                            String data = data0[1].substring(1, 5);
+                            if (jsonObject.get("accountNum").equals(data)) {
+//                                System.out.println("----------------------------------");
+                                System.out.println(data0[1] + "  -------- -" + data1[1] + " -------->  " + data2[1]);
+                                System.out.println("balance : " + data3[1]);
+                                System.out.println(data4[1] + "." + data4[3] + "." + data5[1] + " " + data6[1] + ":" + data6[2] + ":" + data7[0]);
+                                System.out.println("----------------------------------");
+                            } else {
+                                System.out.println("Your card history data was not found.");
+                            }
+                        }
+
+                        break;
+                    }
+                    default:
+                        System.out.println("OOO NO, Replay enter number!");
+                }
+            }
+
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -110,8 +188,6 @@ public class ServiceImpelement implements CardService{
                     if((boolean)jsonObject.get("state")){
                         System.out.println("O'tkazmoqchi bo'lgan summani kiriting : ");
                         double sum = scanner.nextDouble();
-                        System.out.println(inserted);
-                        System.out.println(jsonObject);
 
                         //--------------Calendar put to Object
 
@@ -140,23 +216,28 @@ public class ServiceImpelement implements CardService{
                                 while (scanner1.hasNext()){
                                     Num = Integer.parseInt(scanner1.next());
                                 }
-                            }else Num = 0;
+                            }else {Num = 0;}
+                            inserted.put("chiqimBalance", sum);
+                            jsonObject.put("kirimBalance", sum);
+                            inserted.put("kiruvchiCard", jsonObject.get("accountNum"));
+                            jsonObject.put("chiquvchiCard", inserted.get("accountNum"));
 
-                            JSONArray jsonArrayH = new JSONArray();
                             String obj1 = null;
                             String obj2 = null;
                             int Num1 = Num;
                             while (Num < Num1+1) {
                                 Num++;
-                                obj1 =  Num + "." + "Chiqim : " + inserted + "\n";
+                                obj1 =  Num + ". " + "Chiqim : " + inserted + "\n";
                                 Num++;
-                                obj2 =  "Kirim : " + jsonObject + "\n";
+                                obj2 =  Num + ". " + "Kirim : " + jsonObject + "\n";
                             }
-                            String obj3 = "\n";
-                            jsonArrayH.add(obj1);
-                            jsonArrayH.add(1, obj3);
-                            jsonArrayH.add(obj2);
-                            System.out.println(jsonArrayH);
+
+                            inserted.remove("chiqimBalance");
+                            inserted.remove("kiruvchiCard");
+                            jsonObject.remove("chiquvchiCard");
+                            jsonObject.remove("kirimBalance");
+
+
                             String num = String.valueOf(Num);
 
                             //---------- Write spisk File
@@ -168,8 +249,8 @@ public class ServiceImpelement implements CardService{
                             //---------------Income and Expenditure write
 
                             OutputStream outputStream = new FileOutputStream(file,true);
-                            outputStream.write(jsonArrayH.toString().getBytes(StandardCharsets.UTF_8));
-//                            outputStream.write(obj2.getBytes(StandardCharsets.UTF_8));
+                            outputStream.write(obj1.getBytes(StandardCharsets.UTF_8));
+                            outputStream.write(obj2.getBytes(StandardCharsets.UTF_8));
                             jsonObject.remove("Year");
                             jsonObject.remove("Data");
                             jsonObject.remove("Clock");
@@ -184,12 +265,12 @@ public class ServiceImpelement implements CardService{
                             File out1 = new File("CardData/json/cardData.json");
                             OutputStream output1 = new FileOutputStream(out1);
                             output1.write(gson.toJson(jsonArray).getBytes(StandardCharsets.UTF_8));
-
+                            System.out.println("------=Successfully=-------");
                         }else {
-                            System.out.println("Hisomingizda mablag' yetarli emas.");
+                            System.out.println("There is not enough money in your account.");
                         }
                     }else {
-                        System.out.println("kartangiz bloklangan");
+                        System.out.println("Your card is blocked");
                     }
                 }
             }

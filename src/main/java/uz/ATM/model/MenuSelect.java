@@ -18,9 +18,10 @@ public class MenuSelect {
         if (inserted != null) {
             if (checkPin(inserted)) {
                 while (true) {
+                    System.out.println("======-==MENU==-======");
                     System.out.println("1. Money transfer");
                     System.out.println("2. See balance");
-                    System.out.println("3.Income and expenditure history");
+                    System.out.println("3. Income and expenditure history");
                     System.out.println("0. Exit");
 
                     switch (scanner.nextInt()) {

@@ -10,15 +10,6 @@ public class Card {
     private String cardType;
 
 
-    private String Message;
-
-    public String getMessage() {
-        return Message;
-    }
-
-    public void setMessage(String message) {
-        Message = message;
-    }
 
     public Card(int id, String accountNum, String pin, String owner, String balance, boolean state, String cardType) {
         this.id = id;
@@ -94,7 +85,7 @@ public class Card {
 
     @Override
     public String toString() {
-        return  Message + ":{" +
+        return  "CardData" + ":{" +
                 "id=" + id +
                 ", accountNum='" + accountNum + '\'' +
                 ", pin=" + pin +
