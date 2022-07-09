@@ -12,10 +12,9 @@ import java.util.Scanner;
 public class CheckCard {
 
     public static int globalNum = 0;
-    public static JSONArray checkID(String id){
-        if(id.equals("1")){
-            return null;
-        }
+    public static JSONArray checkID(){
+        Scanner scanner = new Scanner(System.in);
+        String id = scanner.nextLine();
         id = id.trim();
         JSONParser jsonParser = new JSONParser();
         String cardMessage = "";

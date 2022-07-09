@@ -1,0 +1,30 @@
+{
+	"info": {
+		"_postman_id": "9e11bb86-072b-42a4-83ce-80aa2efed52d",
+		"name": "ATM Operations",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21282202"
+	},
+	"item": [
+		{
+			"name": "GET BANK Info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/card/get/all",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"card",
+						"get",
+						"all"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

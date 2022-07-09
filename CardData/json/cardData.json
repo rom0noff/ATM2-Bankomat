@@ -3,7 +3,7 @@
     "owner": "Sherjonov Jahongir",
     "accountNum": "8600 1111 3333 2121",
     "pin": "1234",
-    "balance": "96990.0",
+    "balance": "50010.2",
     "cardType": "UZCARD",
     "id": 1,
     "state": true
@@ -12,7 +12,7 @@
     "owner": "Sherjonov Zohidjon",
     "accountNum": "9860 3333 4343 9090",
     "pin": "1234",
-    "balance": "95960.0",
+    "balance": "56440.0",
     "cardType": "HUMO",
     "id": 2,
     "state": true
@@ -30,10 +30,13 @@
     "owner": "Azodov Doniyor",
     "accountNum": "9860 1111 2321 4444",
     "pin": "1234",
-    "balance": "96630.0",
+    "balance": "130630.0",
+    "Year": 2022,
     "cardType": "HUMO",
+    "Data": "2.7",
     "id": 4,
-    "state": true
+    "state": true,
+    "Clock": "1:57:45"
   },
   {
     "owner": "Quronboyev Asadbek",
@@ -84,7 +87,7 @@
     "owner": "Matsopoyev Shahzod",
     "accountNum": "8600 2277 1273 1958",
     "pin": "1111",
-    "balance": "22000.0",
+    "balance": "27000.0",
     "cardType": "UZCARD",
     "id": 10,
     "state": true
@@ -96,6 +99,33 @@
     "balance": "15000.0",
     "cardType": "UZCARD",
     "id": 11,
+    "state": true
+  },
+  {
+    "owner": "Dilshod Torayev",
+    "accountNum": "9860 1111 2321 4444",
+    "pin": "1111",
+    "balance": "57400.0",
+    "cardType": "HUMO",
+    "id": 12,
+    "state": true
+  },
+  {
+    "owner": "urunov",
+    "accountNum": "8600 4453 4549 8348",
+    "pin": "3223",
+    "balance": "0",
+    "cardType": "UZCARD",
+    "id": 13,
+    "state": true
+  },
+  {
+    "owner": "Sherjonov Sardor",
+    "accountNum": "4000 9348 8040 7860",
+    "pin": "2020",
+    "balance": "0",
+    "cardType": "VISA",
+    "id": 14,
     "state": true
   }
 ]

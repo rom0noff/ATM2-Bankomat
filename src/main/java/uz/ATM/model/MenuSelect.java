@@ -1,9 +1,8 @@
 package uz.ATM.model;
 
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import uz.ATM.Service.CardService;
-import uz.ATM.Service.ServiceImpelement;
+import uz.ATM.Service.ServiceImplement;
 
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -11,16 +10,15 @@ import java.util.Scanner;
 import static uz.ATM.checkCardAndPin.CheckCard.checkPin;
 
 public class MenuSelect {
-
     public static void menuSelect(JSONArray inserted) throws FileNotFoundException {
         Scanner scanner = new Scanner(System.in);
-        CardService cardService = new ServiceImpelement();
+        CardService cardService = new ServiceImplement();
         if (inserted != null) {
             if (checkPin(inserted)) {
                 while (true) {
                     System.out.println("======-==MENU==-======");
                     System.out.println("1. Money transfer");
-                    System.out.println("2. See balance");
+                    System.out.println("2. Check balance");
                     System.out.println("3. Income and expenditure history");
                     System.out.println("4. Exchange rates");
                     System.out.println("0. Exit");
@@ -31,7 +29,7 @@ public class MenuSelect {
                             break;
                         }
                         case 2: {
-                            cardService.seeBalanc(inserted);
+                            cardService.seeBalance(inserted);
                             break;
                         }
                         case 3 : {

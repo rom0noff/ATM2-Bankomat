@@ -9,8 +9,6 @@ public class Card {
     private boolean state;
     private String cardType;
 
-
-
     public Card(int id, String accountNum, String pin, String owner, String balance, boolean state, String cardType) {
         this.id = id;
         this.accountNum = accountNum;
@@ -80,9 +78,6 @@ public class Card {
     public void setCardType(String cardType) {
         this.cardType = cardType;
     }
-
-
-
     @Override
     public String toString() {
         return  "CardData" + ":{" +

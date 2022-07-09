@@ -1,4 +1,7 @@
 package uz.ATM.model;
 
-public class Currency {
+public enum Currency {
+    USD,
+    RUBLE,
+    SUM
 }
